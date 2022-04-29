@@ -60,9 +60,9 @@ function App() {
         </Nabvar>
         <Wrapper>
           <Routes>
-            <Route exact path='/todos' component={TodoList} />
-            <Route exact path='/todos/new' component={AddTodo} />
-            <Route path='/todos/:id/edit' component={EditTodo} />
+            <Route exact path='/todos' element={<TodoList/>} />
+            <Route exact path='/todos/new' element={<AddTodo/>} />
+            <Route path='/todos/:id/edit' element={<EditTodo/>} />
           </Routes>
         </Wrapper>
       </Router>
