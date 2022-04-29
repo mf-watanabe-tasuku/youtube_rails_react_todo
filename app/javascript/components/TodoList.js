@@ -22,6 +22,7 @@ const SearchForm = styled.input`
 const RemoveAllButton = styled.button`
     width: 16%;
     height: 40px;
+    background: #f54242;
     border: none;
     font-weight: 500;
     margin-left: 10px;
@@ -98,9 +99,8 @@ function TodoList() {
 
     const updateIsCompleted = (index, val) => {
         const data = {
-            id: val.id,
             name: val.name,
-            is_completed: val.is_completed
+            is_completed: !val.is_completed
         };
         axios.patch(`/api/v1/todos/${val.id}`, data)
         .then(resp => {
@@ -148,7 +148,7 @@ function TodoList() {
                             <TodoName is_completed={val.is_completed}>
                                 {val.name}
                             </TodoName>
-                            <Link to={'/todos' + val.id + '/edit'}>
+                            <Link to={'/todos/' + val.id + '/edit'}>
                                 <EditButton>
                                     <AiFillEdit />
                                 </EditButton>
