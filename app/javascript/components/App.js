@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
@@ -46,24 +46,26 @@ const Wrapper = styled.div`
 function App() {
   return (
     <>
-      <Nabvar>
-        <Logo>TODO</Logo>
-        <NavItems>
-          <NavItem>
-            <Link to='/todos'>Todos</Link>
-          </NavItem>
-          <NavItem>
-            <Link to='/todos/new'>Add New Todo</Link>
-          </NavItem>
-        </NavItems>
-      </Nabvar>
-      <Wrapper>
-        <Routes>
-          <Route exact path='/todos' component={TodoList} />
-          <Route exact path='/todos/new' component={AddTodo} />
-          <Route path='/todos/:id/edit' component={EditTodo} />
-        </Routes>
-      </Wrapper>
+      <Router>
+        <Nabvar>
+          <Logo>TODO</Logo>
+          <NavItems>
+            <NavItem>
+              <Link to='/todos'>Todos</Link>
+            </NavItem>
+            <NavItem>
+              <Link to='/todos/new'>Add New Todo</Link>
+            </NavItem>
+          </NavItems>
+        </Nabvar>
+        <Wrapper>
+          <Routes>
+            <Route exact path='/todos' component={TodoList} />
+            <Route exact path='/todos/new' component={AddTodo} />
+            <Route path='/todos/:id/edit' component={EditTodo} />
+          </Routes>
+        </Wrapper>
+      </Router>
     </>
   );
 }
