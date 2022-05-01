@@ -105,13 +105,13 @@ function EditTodo() {
   };
 
   const updateTodo = () => {
-    const sendData = {
+    const data = {
       name: currentTodo.name,
       is_completed: currentTodo.is_completed,
     };
     axios
-      .patch(`/api/v1/todos/${currentTodo.id}`, sendData)
-      .then((resp) => {
+      .patch(`/api/v1/todos/${currentTodo.id}`, data)
+      .then(() => {
         notify();
         navigate('/todos');
       })
