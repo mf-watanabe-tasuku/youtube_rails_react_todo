@@ -147,7 +147,7 @@ function EditTodo() {
             onChange={handleInputChange}
           />
           <div>
-            <span>CurrentStatus</span>
+            <span>Current Status</span>
             <br />
             <CurrentStatus>
               {currentTodo.is_completed ? 'Completed' : 'UnCompleted'}
@@ -159,7 +159,7 @@ function EditTodo() {
               className='badge badge-primary mr-2'
               onClick={() => updateIsCompleted(currentTodo)}
             >
-              UnCompleted
+              Uncompleted
             </IsCompletedButton>
           ) : (
             <IsCompletedButton
