@@ -1,0 +1,38 @@
+class Api::V1::TodoCategoriesController < ApplicationController
+    def index
+        todo_categories = TodoCategory.order(created_at: :desc)
+        render json: todo_categories
+    end
+
+    def create
+        todo_category = TodoCategory.new(todo_todo_category_params)
+        if todo_todo_category.save
+            render json: todo_todo_category
+        else
+            render json: todo_category.errors, status: 422
+        end
+    end
+
+    def update
+        todo_category = TodoCategory.find(params[:id])
+        if todo_category.save(todo_category_params)
+            render json: todo_category
+        else
+            render json: todo_category.errors, status: 422
+        end
+    end
+
+    def destroy
+        if TodoCategory.destroy(params[:id])
+            head :no_content
+        else
+            render json: { error: "Failed to destroy" }, status: 422
+        end
+    end
+
+    private
+
+    def todo_category_params
+        params.require(:todo_category).permit(:name)
+    end
+end

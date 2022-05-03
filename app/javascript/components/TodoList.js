@@ -9,6 +9,7 @@ const SearchAndButton = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 50px 0 30px;
 `;
 
 const SearchForm = styled.input`
@@ -34,19 +35,17 @@ const RemoveAllButton = styled.button`
 
 const TodoName = styled.span`
   font-size: 27px;
-  ${({ is_completed }) =>
-    is_completed &&
-    `
-        opacity: 0.4;
-    `}
+  flex-grow: 1;
+  padding: 0 10px;
+  ${({ is_completed }) => is_completed && `opacity: 0.4;`}
 `;
 
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: c
   margin: 7px auto;
-  padding: 10px;
+  padding: 10px 0;
   font-size: 25px;
 `;
 
@@ -115,7 +114,6 @@ function TodoList() {
 
   return (
     <>
-      <h1>Todo List</h1>
       <SearchAndButton>
         <SearchForm
           type='text'

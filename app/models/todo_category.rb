@@ -1,0 +1,2 @@
+class TodoCategory < ApplicationRecord
+end

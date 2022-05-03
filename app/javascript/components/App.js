@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
 import EditTodo from './EditTodo';
+import Categories from './CategoryList';
 import './App.css';
 
 const Nabvar = styled.div`
@@ -48,21 +49,27 @@ function App() {
     <>
       <Router>
         <Nabvar>
-          <Logo>TODO</Logo>
+          <Logo>
+            <Link to='/todos'>TODO</Link>
+          </Logo>
           <NavItems>
             <NavItem>
               <Link to='/todos'>Todos</Link>
             </NavItem>
             <NavItem>
-              <Link to='/todos/new'>Add New Todo</Link>
+              <Link to='/todos/new'>Add Todo</Link>
+            </NavItem>
+            <NavItem>
+              <Link to='/categories'>Categories</Link>
             </NavItem>
           </NavItems>
         </Nabvar>
         <Wrapper>
           <Routes>
-            <Route exact path='/todos' element={<TodoList/>} />
-            <Route exact path='/todos/new' element={<AddTodo/>} />
-            <Route path='/todos/:id/edit' element={<EditTodo/>} />
+            <Route exact path='/todos' element={<TodoList />} />
+            <Route exact path='/todos/new' element={<AddTodo />} />
+            <Route path='/todos/:id/edit' element={<EditTodo />} />
+            <Route path='/categories' element={<Categories />} />
           </Routes>
         </Wrapper>
       </Router>
