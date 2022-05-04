@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { ImCheckboxChecked } from 'react-icons/im'
+import Checkbox from '../components/Checkbox';
+import { ImCheckboxChecked } from 'react-icons/im';
 import { AiFillEdit } from 'react-icons/ai';
 
 const InputAndButton = styled.div`
@@ -110,9 +111,7 @@ function CategoryList() {
         {categories.map((val, key) => {
           return (
             <Row key={key}>
-              <CheckedBox>
-                <ImCheckboxChecked />
-              </CheckedBox>
+              <Checkbox />
               <CategoryName>{val.name}</CategoryName>
               <Link to={'/todos/' + val.id + '/edit'}>
                 <EditButton>
