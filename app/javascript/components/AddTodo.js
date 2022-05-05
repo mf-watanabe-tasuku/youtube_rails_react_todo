@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { FiSend } from 'react-icons/fi';
 
 const InputAndButton = styled.div`
@@ -42,8 +41,6 @@ const Icon = styled.span`
   align-items: center;
   margin: 0 7px;
 `;
-
-toast.configure();
 
 function AddTodo() {
   const initialTodoState = {

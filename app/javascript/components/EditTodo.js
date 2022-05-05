@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const InputName = styled.input`
   font-size: 20px;
@@ -51,8 +50,6 @@ const DeleteButton = styled.button`
   border-radius: 3px;
   cursor: pointer;
 `;
-
-toast.configure();
 
 function EditTodo() {
   const initialTodoState = {

@@ -6,6 +6,8 @@ import TodoList from './TodoList';
 import EditTodo from './EditTodo';
 import Categories from './CategoryList';
 import './App.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Nabvar = styled.div`
   background: #dbfffe;
@@ -47,6 +49,7 @@ const Wrapper = styled.div`
 function App() {
   return (
     <>
+      <ToastContainer />
       <Router>
         <Nabvar>
           <Logo>

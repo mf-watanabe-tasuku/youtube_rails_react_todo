@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import Checkbox from '../components/Checkbox';
-import { ImCheckboxChecked } from 'react-icons/im';
-import { AiFillEdit } from 'react-icons/ai';
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+import { toast } from 'react-toastify';
 
 const InputAndButton = styled.div`
   display: flex;
@@ -50,29 +49,34 @@ const Row = styled.div`
   font-size: 25px;
 `;
 
-const CheckedBox = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0 7px;
-  color: green;
-  cursor: pointer;
-`;
-
 const EditButton = styled.span`
   display: flex;
   align-items: center;
   margin: 0 7px;
+  cursor: pointer;
+`;
+
+const DeleteButton = styled.span`
+  display: flex;
+  align-items: center;
+  margin: 0 7px;
+  cursor: pointer;
 `;
 
 function CategoryList() {
+  const initialCategoryState = {
+    id: null,
+    name: '',
+  };
+
   const [categories, setCategories] = useState([]);
-  const [categoryName, setCategoryName] = useState('');
+  const [newCategory, setNewCategory] = useState(initialCategoryState);
 
   useEffect(() => {
     axios
       .get('/api/v1/todo_categories')
       .then((resp) => {
-        console.log(resp.data);
+        console.log(resp);
         setCategories(resp.data);
       })
       .catch((e) => {
@@ -80,13 +84,52 @@ function CategoryList() {
       });
   }, []);
 
-  const AddCategory = () => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewCategory({ ...newCategory, [name]: value });
+  };
+
+  const createNotify = () => {
+    toast.success('Category successfully created!', {
+      position: 'bottom-center',
+      hideProgressBar: true,
+    });
+  };
+
+  const deleteNotify = () => {
+    toast.success('Category successfully destroyed!', {
+      position: 'bottom-center',
+      hideProgressBar: true,
+    });
+  };
+
+  const saveCategory = () => {
+    const data = {
+      name: newCategory.name,
+    };
+
+    axios
+      .post('/api/v1/todo_categories', data)
+      .then((resp) => {
+        createNotify();
+        setNewCategory(initialCategoryState);
+        const newCategories = [...categories, resp.data];
+        setCategories(newCategories);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const deleteCategory = (id) => {
     const sure = window.confirm('Are you sure?');
     if (sure) {
       axios
-        .post('/api/v1/todo_categories')
-        .then(() => {
-          setCategories([]);
+        .delete('/api/v1/todo_categories/' + id)
+        .then((resp) => {
+          deleteNotify();
+          const newCategories = categories.filter((cat) => cat.id != id);
+          setCategories(newCategories);
         })
         .catch((e) => {
           console.log(e);
@@ -99,28 +142,31 @@ function CategoryList() {
       <InputAndButton>
         <InputForm
           type='text'
+          required
+          name='name'
+          value={newCategory.name}
           placeholder='Add new category...'
-          onChange={(e) => {
-            setCategoryName(e.target.value);
-          }}
+          onChange={handleInputChange}
         />
-        <AddCategoryButton onClick={AddCategory}>Add</AddCategoryButton>
+        <AddCategoryButton onClick={saveCategory}>Add</AddCategoryButton>
       </InputAndButton>
-
       <div>
-        {categories.map((val, key) => {
-          return (
-            <Row key={key}>
-              <Checkbox />
-              <CategoryName>{val.name}</CategoryName>
-              <Link to={'/todos/' + val.id + '/edit'}>
-                <EditButton>
-                  <AiFillEdit />
-                </EditButton>
-              </Link>
-            </Row>
-          );
-        })}
+        {categories &&
+          categories.map((val, key) => {
+            return (
+              <Row key={key}>
+                <CategoryName>{val.name}</CategoryName>
+                <Link to={'/categories/' + val.id + '/edit'}>
+                  <EditButton>
+                    <AiFillEdit />
+                  </EditButton>
+                </Link>
+                <DeleteButton onClick={() => deleteCategory(val.id)}>
+                  <AiFillDelete />
+                </DeleteButton>
+              </Row>
+            );
+          })}
       </div>
     </>
   );
