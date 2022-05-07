@@ -4,6 +4,11 @@ class Api::V1::TodoCategoriesController < ApplicationController
         render json: todo_categories
     end
 
+    def show
+        todo_category = TodoCategory.find(params[:id])
+        render json: todo_category
+    end
+
     def create
         todo_category = TodoCategory.new(todo_category_params)
         if todo_category.save
@@ -15,7 +20,7 @@ class Api::V1::TodoCategoriesController < ApplicationController
 
     def update
         todo_category = TodoCategory.find(params[:id])
-        if todo_category.save(todo_category_params)
+        if todo_category.update(todo_category_params)
             render json: todo_category
         else
             render json: todo_category.errors, status: 422

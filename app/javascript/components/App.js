@@ -5,6 +5,7 @@ import AddTodo from './AddTodo';
 import TodoList from './TodoList';
 import EditTodo from './EditTodo';
 import Categories from './CategoryList';
+import EditCategory from './EditCategory';
 import './App.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -73,6 +74,7 @@ function App() {
             <Route exact path='/todos/new' element={<AddTodo />} />
             <Route path='/todos/:id/edit' element={<EditTodo />} />
             <Route path='/categories' element={<Categories />} />
+            <Route path='/categories/:id/edit' element={<EditCategory />} />
           </Routes>
         </Wrapper>
       </Router>

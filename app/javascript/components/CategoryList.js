@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+import { AiFillEdit } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 const InputAndButton = styled.div`
@@ -56,13 +56,6 @@ const EditButton = styled.span`
   cursor: pointer;
 `;
 
-const DeleteButton = styled.span`
-  display: flex;
-  align-items: center;
-  margin: 0 7px;
-  cursor: pointer;
-`;
-
 function CategoryList() {
   const initialCategoryState = {
     id: null,
@@ -96,13 +89,6 @@ function CategoryList() {
     });
   };
 
-  const deleteNotify = () => {
-    toast.success('Category successfully destroyed!', {
-      position: 'bottom-center',
-      hideProgressBar: true,
-    });
-  };
-
   const saveCategory = () => {
     const data = {
       name: newCategory.name,
@@ -119,22 +105,6 @@ function CategoryList() {
       .catch((e) => {
         console.log(e);
       });
-  };
-
-  const deleteCategory = (id) => {
-    const sure = window.confirm('Are you sure?');
-    if (sure) {
-      axios
-        .delete('/api/v1/todo_categories/' + id)
-        .then((resp) => {
-          deleteNotify();
-          const newCategories = categories.filter((cat) => cat.id != id);
-          setCategories(newCategories);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
   };
 
   return (
@@ -161,9 +131,6 @@ function CategoryList() {
                     <AiFillEdit />
                   </EditButton>
                 </Link>
-                <DeleteButton onClick={() => deleteCategory(val.id)}>
-                  <AiFillDelete />
-                </DeleteButton>
               </Row>
             );
           })}
