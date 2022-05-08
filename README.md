@@ -1,24 +1,13 @@
-# README
+# Rails React Todo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+DEMO: [デモ](https://youtube-rails-react-todo.herokuapp.com/)
 
-Things you may want to cover:
+こちらのアプリケーションは以下のYoutube動画を参考に作成し、改良を加えたものになります。
 
-* Ruby version
+参考: [ReactとRailsを利用してTODOアプリを作成しよう](https://youtu.be/yD0QotED6f8)
 
-* System dependencies
+## バージョン
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Ruby 3.0.3
+Rails 6.1.4
+React 18.1.0
