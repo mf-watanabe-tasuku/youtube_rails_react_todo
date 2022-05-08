@@ -11,3 +11,5 @@ DEMO: [デモ](https://youtube-rails-react-todo.herokuapp.com/)
 Ruby 3.0.3
 Rails 6.1.4
 React 18.1.0
+
+![](https://youtube-rails-react-todo.herokuapp.com/demo.jpg)
