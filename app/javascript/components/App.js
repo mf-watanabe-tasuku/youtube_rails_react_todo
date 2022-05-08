@@ -6,7 +6,6 @@ import TodoList from './TodoList';
 import EditTodo from './EditTodo';
 import Categories from './CategoryList';
 import EditCategory from './EditCategory';
-import '../styles/application.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
